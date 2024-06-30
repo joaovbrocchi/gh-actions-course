@@ -7,11 +7,15 @@ jobs:
   echo-hello:
     runs-on: ubuntu-latest
     steps:
-    - name: Echo Hello
+    - name: Say Hello
       run: echo "Hello World"
 
   echo-goodbye:
     runs-on: ubuntu-latest
     steps:
-    - name: Echo Goodbye
+    - name: failed steps
+      run: |
+        "I will fail"
+        "exit 1"
+    - name: Say Goodbye
       run: echo "Goodbye"
