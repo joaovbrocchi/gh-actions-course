@@ -1,6 +1,6 @@
 name: building-blocks
 on:
-  push:
+  # push:
   workflow_dispatch:
 
 jobs:

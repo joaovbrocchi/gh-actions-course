@@ -1,10 +1,10 @@
 name: explorando
 on:
-  push:
+#   push:
   workflow_dispatch:
-  pull_request:
-  schedule:
-    - cron: '0 0 * * *'  # Executa diariamente à meia-noite
+#   pull_request:
+#   schedule:
+#     - cron: '0 0 * * *'  # Executa diariamente à meia-noite
 
 jobs:
   echo:
