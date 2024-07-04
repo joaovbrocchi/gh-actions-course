@@ -1,6 +1,7 @@
 name: "06 - Using Actions"
 on:
-  workflow_dispatch:
+    workflow_dispatch:
+    push:
 run-name: "My custom workflow run name - ${{ github.runner.os }}" 
     
 jobs:
