@@ -1,0 +1,25 @@
+name: "06 - Using Actions"
+on:
+  workflow_dispatch:
+run-name: "My custom workflow run name - ${{ github.runner.os }}" 
+    
+jobs:
+  echo-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Display Information
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Run number: ${{ github.run_number }}"
+
+      - name: Retrieve Variable
+        run: |
+          echo "MY_VAR: ${{ secrets.MY_VAR }}"
