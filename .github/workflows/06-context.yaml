@@ -1,6 +1,10 @@
 name: "06 - Using Actions"
 on:
     workflow_dispatch:
+      inputs:
+        debug:
+          type: boolean
+          default: false
     push:
 run-name: "My custom workflow run name - ${{ github.runner.os }}" 
     
@@ -23,4 +27,4 @@ jobs:
 
       - name: Retrieve Variable
         run: |
-          echo "MY_VAR: ${{ secrets.MY_VAR }}"
+          echo "MY_VAR: ${{ vars.MY_VAR }}"
