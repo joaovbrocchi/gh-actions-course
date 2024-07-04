@@ -1,0 +1,31 @@
+name: "07 - Using Expression"
+on: 
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: false
+
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Debug
+        if: ${{ inputs.debug }}
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "SHA: ${{ github.sha }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run ID: ${{ github.run_id }}"
+          echo "Run number: ${{ github.run_number }}"
+
+      - name: Check if main branch
+        if: ${{ inputs.debug && github.ref == 'refs/heads/main' }}
+        run: echo "I was triggered from main"
+      - name: Greeting
+        run: echo "Hello, World"
