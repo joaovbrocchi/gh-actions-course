@@ -19,6 +19,7 @@ jobs:
             tag: experimental
     name: ${{ matrix.os }}-${{ matrix.node-version }}
     steps:
+        
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -27,8 +28,10 @@ jobs:
       - name: Fail if experimental
         if: ${{ matrix.tag == 'experimental' }}
         run: exit 1
+        
 
       - name: Perform some tests
+        continue-on-error: true
         run: |
           echo "Running tests on OS ${{ matrix.os }} and NodeJS ${{ matrix.node-version }}"
           sleep 10
