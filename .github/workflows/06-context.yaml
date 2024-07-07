@@ -5,7 +5,7 @@ on:
         debug:
           type: boolean
           default: false
-    push:
+    # push:
 run-name: "My custom workflow run name - ${{ github.runner.os }}" 
     
 jobs:
