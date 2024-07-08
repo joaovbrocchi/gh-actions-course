@@ -1,14 +1,33 @@
 name: 17 - 2 - Custom Actions - JS
 on:
     workflow_dispatch:
-run-name: 17 - 2 - Custom Actions - JS
+      inputs:
+        working-directory:
+          description: The working directory of the project to check for dependency updates
+          required: true
+        gh-token:
+          description: Authentication token with repository access. Must have write access to contents and pull-requests
+          required: true
+        debug:
+          description: Whether the output debug messages to the console
+          required: false
+run-name: -${{inputs.working-directory}}-${{inputs.gh-token}}-${{inputs.debug}}
 jobs:
-    dependency-update:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout Code
-              uses: actions/checkout@v4
+  dependency-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-            - name: Setup Node and NPM Dependencies
-              uses: ./.github/actions/js-dependency-update
-           
+      - name: Extract Branch Name
+        id: extract_branch
+        run: echo "::set-output name=branch_name::${GITHUB_REF#refs/heads/}"
+
+      - name: Setup Node and NPM Dependencies
+        uses: ./.github/actions/js-dependency-update
+        with: 
+          base-branch: ${{ inputs.base-branch }}
+          target-branch: ${{ steps.extract_branch.outputs.branch_name }}
+          working-directory: ${{ inputs.working-directory }}
+          gh-token: ${{ inputs.gh-token }}
+          debug: ${{ inputs.debug }}
