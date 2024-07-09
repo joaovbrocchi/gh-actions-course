@@ -1,0 +1,13 @@
+name: "18 - 2 - Reusable Workflows - Reusable Definition"
+on: 
+    workflow_dispatch:
+        inputs:
+            working-directory:
+                type: string
+                required: true
+                default: ./my-react-app
+jobs:
+    deploy:
+        uses: ./.github/workflows/18-1-reusable-workflows.yaml
+        with:
+            target-directory: ${{inputs.working-directory}}

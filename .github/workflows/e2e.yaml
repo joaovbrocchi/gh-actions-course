@@ -1,0 +1,24 @@
+name: E2E Tests
+on:
+    workflow_dispatch:
+        inputs:
+            working-directory: 
+                description: "Directory that will excute de workflow"
+jobs:
+    e2e-tests:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: ${{inputs.working-directory}}
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v4
+              
+            - name: Setup Node
+              uses: actions/setup-node@v4
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run E2E tests
+              run: npm run test:e2e
